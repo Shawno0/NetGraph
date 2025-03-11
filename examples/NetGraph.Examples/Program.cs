@@ -16,7 +16,7 @@ public class Program
         // string apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") 
         //     ?? throw new InvalidOperationException("OPENAI_API_KEY environment variable is not set");
 
-        string apiKey = "AIzaSyCjCZIHjD7P1f4k32IlwtB5ZQSJzwxvxfQ";
+        string apiKey = "";
 
         // Create the model
         var model = new GeminiModel(apiKey, "gemini-2.0-flash", 0.0f);
