@@ -1,15 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "LuNxMpTBm+akf341VvCvmgxh9I0SjQ0thYH45mr+HcL9DSON5ZxfyDLhFzaFy8B4ZnSX7fOtijW9H7aFTalAQw==",
+  "dgSpecHash": "XMj+6qQHl0Yi2tNOp7nGVEtTh6rsml4FO9wpizULcRMd9oHu4o8hWWdjOt2QSJ3QKHJOQDgczA62XG5U+KfSFw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Shawno0\\source\\repos\\NetGraph\\examples\\NetGraph.Examples\\NetGraph.Examples.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Shawno0\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.0\\microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",
-    "C:\\Users\\Shawno0\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
-    "C:\\Users\\Shawno0\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
-    "C:\\Users\\Shawno0\\.nuget\\packages\\system.reactive\\6.0.0\\system.reactive.6.0.0.nupkg.sha512",
-    "C:\\Users\\Shawno0\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512",
-    "C:\\Users\\Shawno0\\.nuget\\packages\\system.text.json\\8.0.0\\system.text.json.8.0.0.nupkg.sha512"
+    "C:\\Users\\Shawno0\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\9.0.2\\microsoft.extensions.dependencyinjection.9.0.2.nupkg.sha512",
+    "C:\\Users\\Shawno0\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.2\\microsoft.extensions.dependencyinjection.abstractions.9.0.2.nupkg.sha512",
+    "C:\\Users\\Shawno0\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\9.0.2\\microsoft.extensions.logging.abstractions.9.0.2.nupkg.sha512",
+    "C:\\Users\\Shawno0\\.nuget\\packages\\system.diagnostics.diagnosticsource\\9.0.2\\system.diagnostics.diagnosticsource.9.0.2.nupkg.sha512",
+    "C:\\Users\\Shawno0\\.nuget\\packages\\system.io.pipelines\\9.0.2\\system.io.pipelines.9.0.2.nupkg.sha512",
+    "C:\\Users\\Shawno0\\.nuget\\packages\\system.reactive\\6.0.1\\system.reactive.6.0.1.nupkg.sha512",
+    "C:\\Users\\Shawno0\\.nuget\\packages\\system.text.encodings.web\\9.0.2\\system.text.encodings.web.9.0.2.nupkg.sha512",
+    "C:\\Users\\Shawno0\\.nuget\\packages\\system.text.json\\9.0.2\\system.text.json.9.0.2.nupkg.sha512"
   ],
   "logs": []
 }

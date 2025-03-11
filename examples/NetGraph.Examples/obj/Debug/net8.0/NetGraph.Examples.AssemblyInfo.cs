@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NetGraph.Examples")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cb34103cd093c0d2867a7f2588b6539c06c42d78")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+af3a9db2925d0a5cd8af74bd9b951b17e03a6bd8")]
 [assembly: System.Reflection.AssemblyProductAttribute("NetGraph.Examples")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NetGraph.Examples")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

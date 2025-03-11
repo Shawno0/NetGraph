@@ -13,17 +13,19 @@ public class Program
     public static void Main(string[] args)
     {
         // Set your OpenAI API key
-        string apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") 
-            ?? throw new InvalidOperationException("OPENAI_API_KEY environment variable is not set");
+        // string apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") 
+        //     ?? throw new InvalidOperationException("OPENAI_API_KEY environment variable is not set");
+
+        string apiKey = "AIzaSyCjCZIHjD7P1f4k32IlwtB5ZQSJzwxvxfQ";
 
         // Create the model
-        var model = new OpenAIModel(apiKey, "gpt-4o");
+        var model = new GeminiModel(apiKey, "gemini-2.0-flash", 0.0f);
 
         // Define the tools
         var searchTool = new Tool(
             "search",
             "Call to surf the web.",
-            (Func<string, string>)Search
+            Search
         );
 
         // Bind tools to the model

@@ -295,6 +295,58 @@
             Creates a deep clone of this message.
             </summary>
         </member>
+        <member name="T:NetGraph.Models.GeminiModel">
+            <summary>
+            Gemini API integration for NetGraph.
+            </summary>
+        </member>
+        <member name="M:NetGraph.Models.GeminiModel.#ctor(System.String,System.String,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetGraph.Models.GeminiModel"/> class.
+            </summary>
+            <param name="apiKey">The Gemini API key.</param>
+            <param name="model">The model to use (e.g., "gemini-2.0-pro-exp").</param>
+            <param name="temperature">The sampling temperature to use.</param>
+        </member>
+        <member name="M:NetGraph.Models.GeminiModel.BindTools(System.Collections.Generic.IEnumerable{NetGraph.Tools.Tool})">
+            <summary>
+            Binds tools to the model for tool calling.
+            </summary>
+            <param name="tools">The tools to bind.</param>
+            <returns>A new GeminiModel instance with the tools bound.</returns>
+        </member>
+        <member name="M:NetGraph.Models.GeminiModel.Invoke(System.Collections.Generic.IEnumerable{NetGraph.Messages.Message})">
+            <summary>
+            Invokes the model with the given messages and returns a response.
+            </summary>
+            <param name="messages">The messages to send to the model.</param>
+            <returns>The model's response.</returns>
+        </member>
+        <member name="T:NetGraph.Models.GeminiCompletionResponse">
+            <summary>
+            Response from the Gemini API for content generation.
+            </summary>
+        </member>
+        <member name="T:NetGraph.Models.GeminiCandidate">
+            <summary>
+            A candidate in a completion response.
+            </summary>
+        </member>
+        <member name="T:NetGraph.Models.GeminiContent">
+            <summary>
+            Content in a completion response.
+            </summary>
+        </member>
+        <member name="T:NetGraph.Models.GeminiToolCall">
+            <summary>
+            Tool call in a message.
+            </summary>
+        </member>
+        <member name="T:NetGraph.Models.GeminiFunction">
+            <summary>
+            Function in a tool call.
+            </summary>
+        </member>
         <member name="T:NetGraph.Models.OpenAIModel">
             <summary>
             OpenAI API integration for NetGraph.
