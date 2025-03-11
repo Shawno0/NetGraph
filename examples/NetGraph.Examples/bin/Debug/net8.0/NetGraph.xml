@@ -1,0 +1,537 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NetGraph</name>
+    </assembly>
+    <members>
+        <member name="T:NetGraph.Checkpoint.ICheckpointer">
+            <summary>
+            Interface for checkpointing state in a graph.
+            </summary>
+        </member>
+        <member name="M:NetGraph.Checkpoint.ICheckpointer.Save(System.String,NetGraph.State.IGraphState)">
+            <summary>
+            Saves the state for the specified thread ID.
+            </summary>
+            <param name="threadId">The thread ID.</param>
+            <param name="state">The state to save.</param>
+        </member>
+        <member name="M:NetGraph.Checkpoint.ICheckpointer.Load(System.String)">
+            <summary>
+            Loads the state for the specified thread ID.
+            </summary>
+            <param name="threadId">The thread ID.</param>
+            <returns>The loaded state, or null if no state exists.</returns>
+        </member>
+        <member name="M:NetGraph.Checkpoint.ICheckpointer.Delete(System.String)">
+            <summary>
+            Deletes the state for the specified thread ID.
+            </summary>
+            <param name="threadId">The thread ID.</param>
+        </member>
+        <member name="T:NetGraph.Checkpoint.MemorySaver">
+            <summary>
+            An in-memory implementation of <see cref="T:NetGraph.Checkpoint.ICheckpointer"/> that stores states in memory.
+            </summary>
+        </member>
+        <member name="M:NetGraph.Checkpoint.MemorySaver.Save(System.String,NetGraph.State.IGraphState)">
+            <summary>
+            Saves the state for the specified thread ID.
+            </summary>
+            <param name="threadId">The thread ID.</param>
+            <param name="state">The state to save.</param>
+        </member>
+        <member name="M:NetGraph.Checkpoint.MemorySaver.Load(System.String)">
+            <summary>
+            Loads the state for the specified thread ID.
+            </summary>
+            <param name="threadId">The thread ID.</param>
+            <returns>The loaded state, or null if no state exists.</returns>
+        </member>
+        <member name="M:NetGraph.Checkpoint.MemorySaver.Delete(System.String)">
+            <summary>
+            Deletes the state for the specified thread ID.
+            </summary>
+            <param name="threadId">The thread ID.</param>
+        </member>
+        <member name="T:NetGraph.Graph.CompiledGraph`1">
+            <summary>
+            Represents a graph that has been compiled and can be executed.
+            </summary>
+            <typeparam name="TState">The type of state managed by the graph.</typeparam>
+        </member>
+        <member name="M:NetGraph.Graph.CompiledGraph`1.#ctor(System.Collections.Immutable.ImmutableDictionary{System.String,System.Func{`0,System.Object}},System.Collections.Immutable.ImmutableDictionary{System.String,System.Collections.Generic.List{System.String}},System.Collections.Immutable.ImmutableDictionary{System.String,System.Func{`0,System.String}},NetGraph.Checkpoint.ICheckpointer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetGraph.Graph.CompiledGraph`1"/> class.
+            </summary>
+            <param name="nodes">The nodes in the graph.</param>
+            <param name="edges">The edges in the graph.</param>
+            <param name="conditionalEdges">The conditional edges in the graph.</param>
+            <param name="checkpointer">Optional checkpointer for state persistence.</param>
+        </member>
+        <member name="M:NetGraph.Graph.CompiledGraph`1.Invoke(System.Object,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Executes the graph with the provided state or input.
+            </summary>
+            <param name="input">The initial state or input to the graph.</param>
+            <param name="config">Optional configuration parameters.</param>
+            <returns>The final state after execution.</returns>
+        </member>
+        <member name="M:NetGraph.Graph.CompiledGraph`1.StreamAsync(System.Object,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Asynchronously streams the execution of the graph.
+            </summary>
+            <param name="input">The initial state or input to the graph.</param>
+            <param name="config">Optional configuration parameters.</param>
+            <returns>An async enumerable of state snapshots during execution.</returns>
+        </member>
+        <member name="T:NetGraph.Graph.GraphConstants">
+            <summary>
+            Constants for start and end node names.
+            </summary>
+        </member>
+        <member name="F:NetGraph.Graph.GraphConstants.START">
+            <summary>
+            Special node name representing the start of a graph.
+            </summary>
+        </member>
+        <member name="F:NetGraph.Graph.GraphConstants.END">
+            <summary>
+            Special node name representing the end of a graph.
+            </summary>
+        </member>
+        <member name="T:NetGraph.Graph.StateGraph`1">
+            <summary>
+            Represents a directed graph for managing state transitions.
+            </summary>
+            <typeparam name="TState">The type of state managed by the graph.</typeparam>
+        </member>
+        <member name="P:NetGraph.Graph.StateGraph`1.NodeNames">
+            <summary>
+            Gets the names of all nodes in the graph.
+            </summary>
+        </member>
+        <member name="M:NetGraph.Graph.StateGraph`1.AddNode(System.String,System.Func{`0,System.Object})">
+            <summary>
+            Adds a node to the graph.
+            </summary>
+            <param name="name">The name of the node.</param>
+            <param name="handler">The function that processes the state and returns an update.</param>
+            <returns>The current instance for method chaining.</returns>
+        </member>
+        <member name="M:NetGraph.Graph.StateGraph`1.AddEdge(System.String,System.String)">
+            <summary>
+            Adds an edge between two nodes.
+            </summary>
+            <param name="from">The source node name.</param>
+            <param name="to">The destination node name.</param>
+            <returns>The current instance for method chaining.</returns>
+        </member>
+        <member name="M:NetGraph.Graph.StateGraph`1.AddConditionalEdges(System.String,System.Func{`0,System.String})">
+            <summary>
+            Adds conditional edges from a node based on a function that evaluates the state.
+            </summary>
+            <param name="from">The source node name.</param>
+            <param name="conditionFunction">The function that evaluates the state and returns the destination node name.</param>
+            <returns>The current instance for method chaining.</returns>
+        </member>
+        <member name="M:NetGraph.Graph.StateGraph`1.Compile(NetGraph.Checkpoint.ICheckpointer)">
+            <summary>
+            Compiles the graph into a runnable workflow.
+            </summary>
+            <param name="checkpointer">Optional checkpointer for state persistence.</param>
+            <returns>A compiled graph that can be executed.</returns>
+        </member>
+        <member name="T:NetGraph.Messages.MessageRole">
+            <summary>
+            Represents a message role.
+            </summary>
+        </member>
+        <member name="T:NetGraph.Messages.ToolCall">
+            <summary>
+            Represents a tool call in a message.
+            </summary>
+        </member>
+        <member name="P:NetGraph.Messages.ToolCall.Id">
+            <summary>
+            Gets or sets the unique ID of the tool call.
+            </summary>
+        </member>
+        <member name="P:NetGraph.Messages.ToolCall.Name">
+            <summary>
+            Gets or sets the name of the tool being called.
+            </summary>
+        </member>
+        <member name="P:NetGraph.Messages.ToolCall.Arguments">
+            <summary>
+            Gets or sets the arguments to pass to the tool.
+            </summary>
+        </member>
+        <member name="T:NetGraph.Messages.Message">
+            <summary>
+            Base class for all message types.
+            </summary>
+        </member>
+        <member name="P:NetGraph.Messages.Message.Role">
+            <summary>
+            Gets or sets the role of the message sender.
+            </summary>
+        </member>
+        <member name="P:NetGraph.Messages.Message.Content">
+            <summary>
+            Gets or sets the content of the message.
+            </summary>
+        </member>
+        <member name="P:NetGraph.Messages.Message.ToolCalls">
+            <summary>
+            Gets or sets the tool calls in the message.
+            </summary>
+        </member>
+        <member name="M:NetGraph.Messages.Message.Clone">
+            <summary>
+            Creates a deep clone of this message.
+            </summary>
+        </member>
+        <member name="T:NetGraph.Messages.SystemMessage">
+            <summary>
+            Represents a system message.
+            </summary>
+        </member>
+        <member name="M:NetGraph.Messages.SystemMessage.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetGraph.Messages.SystemMessage"/> class.
+            </summary>
+        </member>
+        <member name="M:NetGraph.Messages.SystemMessage.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetGraph.Messages.SystemMessage"/> class with the specified content.
+            </summary>
+            <param name="content">The content of the message.</param>
+        </member>
+        <member name="M:NetGraph.Messages.SystemMessage.Clone">
+            <summary>
+            Creates a deep clone of this message.
+            </summary>
+        </member>
+        <member name="T:NetGraph.Messages.UserMessage">
+            <summary>
+            Represents a user message.
+            </summary>
+        </member>
+        <member name="M:NetGraph.Messages.UserMessage.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetGraph.Messages.UserMessage"/> class.
+            </summary>
+        </member>
+        <member name="M:NetGraph.Messages.UserMessage.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetGraph.Messages.UserMessage"/> class with the specified content.
+            </summary>
+            <param name="content">The content of the message.</param>
+        </member>
+        <member name="M:NetGraph.Messages.UserMessage.Clone">
+            <summary>
+            Creates a deep clone of this message.
+            </summary>
+        </member>
+        <member name="T:NetGraph.Messages.AIMessage">
+            <summary>
+            Represents an AI assistant message.
+            </summary>
+        </member>
+        <member name="M:NetGraph.Messages.AIMessage.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetGraph.Messages.AIMessage"/> class.
+            </summary>
+        </member>
+        <member name="M:NetGraph.Messages.AIMessage.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetGraph.Messages.AIMessage"/> class with the specified content.
+            </summary>
+            <param name="content">The content of the message.</param>
+        </member>
+        <member name="M:NetGraph.Messages.AIMessage.#ctor(System.String,System.Collections.Generic.List{NetGraph.Messages.ToolCall})">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetGraph.Messages.AIMessage"/> class with content and tool calls.
+            </summary>
+            <param name="content">The content of the message.</param>
+            <param name="toolCalls">The tool calls in the message.</param>
+        </member>
+        <member name="M:NetGraph.Messages.AIMessage.Clone">
+            <summary>
+            Creates a deep clone of this message.
+            </summary>
+        </member>
+        <member name="T:NetGraph.Messages.ToolMessage">
+            <summary>
+            Represents a tool message (response from a tool).
+            </summary>
+        </member>
+        <member name="P:NetGraph.Messages.ToolMessage.ToolCallId">
+            <summary>
+            Gets or sets the ID of the tool call this message is responding to.
+            </summary>
+        </member>
+        <member name="P:NetGraph.Messages.ToolMessage.Name">
+            <summary>
+            Gets or sets the name of the tool.
+            </summary>
+        </member>
+        <member name="M:NetGraph.Messages.ToolMessage.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetGraph.Messages.ToolMessage"/> class.
+            </summary>
+        </member>
+        <member name="M:NetGraph.Messages.ToolMessage.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetGraph.Messages.ToolMessage"/> class with the specified parameters.
+            </summary>
+            <param name="toolCallId">The ID of the tool call this message is responding to.</param>
+            <param name="content">The content of the message (tool result).</param>
+            <param name="name">The name of the tool.</param>
+        </member>
+        <member name="M:NetGraph.Messages.ToolMessage.Clone">
+            <summary>
+            Creates a deep clone of this message.
+            </summary>
+        </member>
+        <member name="T:NetGraph.Models.OpenAIModel">
+            <summary>
+            OpenAI API integration for NetGraph.
+            </summary>
+        </member>
+        <member name="M:NetGraph.Models.OpenAIModel.#ctor(System.String,System.String,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetGraph.Models.OpenAIModel"/> class.
+            </summary>
+            <param name="apiKey">The OpenAI API key.</param>
+            <param name="model">The model to use (e.g., "gpt-4o").</param>
+            <param name="temperature">The sampling temperature to use.</param>
+        </member>
+        <member name="M:NetGraph.Models.OpenAIModel.BindTools(System.Collections.Generic.IEnumerable{NetGraph.Tools.Tool})">
+            <summary>
+            Binds tools to the model for tool calling.
+            </summary>
+            <param name="tools">The tools to bind.</param>
+            <returns>A new OpenAIModel instance with the tools bound.</returns>
+        </member>
+        <member name="M:NetGraph.Models.OpenAIModel.Invoke(System.Collections.Generic.IEnumerable{NetGraph.Messages.Message})">
+            <summary>
+            Invokes the model with the given messages and returns a response.
+            </summary>
+            <param name="messages">The messages to send to the model.</param>
+            <returns>The model's response.</returns>
+        </member>
+        <member name="T:NetGraph.Models.OpenAICompletionResponse">
+            <summary>
+            Response from the OpenAI API for chat completions.
+            </summary>
+        </member>
+        <member name="T:NetGraph.Models.OpenAIChoice">
+            <summary>
+            A choice in a completion response.
+            </summary>
+        </member>
+        <member name="T:NetGraph.Models.OpenAIMessage">
+            <summary>
+            Message in a completion response.
+            </summary>
+        </member>
+        <member name="T:NetGraph.Models.OpenAIToolCall">
+            <summary>
+            Tool call in a message.
+            </summary>
+        </member>
+        <member name="T:NetGraph.Models.OpenAIFunction">
+            <summary>
+            Function in a tool call.
+            </summary>
+        </member>
+        <member name="T:NetGraph.Prebuilt.ReActAgent">
+            <summary>
+            Factory for creating ReAct agents.
+            </summary>
+        </member>
+        <member name="M:NetGraph.Prebuilt.ReActAgent.CreateReactAgent(NetGraph.Prebuilt.IModel,System.Collections.Generic.IEnumerable{NetGraph.Tools.Tool},NetGraph.Checkpoint.ICheckpointer)">
+            <summary>
+            Creates a ReAct agent with the specified model and tools.
+            </summary>
+            <param name="model">The model to use for the agent.</param>
+            <param name="tools">The tools available to the agent.</param>
+            <param name="checkpointer">Optional checkpointer for state persistence.</param>
+            <returns>A compiled graph that implements the ReAct agent.</returns>
+        </member>
+        <member name="T:NetGraph.Prebuilt.IModel">
+            <summary>
+            Interface for language models that can be used with agents.
+            </summary>
+        </member>
+        <member name="M:NetGraph.Prebuilt.IModel.Invoke(System.Collections.Generic.IEnumerable{NetGraph.Messages.Message})">
+            <summary>
+            Invokes the model with the given messages and returns a response.
+            </summary>
+            <param name="messages">The messages to send to the model.</param>
+            <returns>The model's response.</returns>
+        </member>
+        <member name="T:NetGraph.Prebuilt.ToolNode">
+            <summary>
+            A node that executes tools based on tool calls in messages.
+            </summary>
+        </member>
+        <member name="M:NetGraph.Prebuilt.ToolNode.#ctor(System.Collections.Generic.IEnumerable{NetGraph.Tools.Tool})">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetGraph.Prebuilt.ToolNode"/> class.
+            </summary>
+            <param name="tools">The tools available to the node.</param>
+        </member>
+        <member name="M:NetGraph.Prebuilt.ToolNode.Execute(NetGraph.State.MessagesState)">
+            <summary>
+            Processes the state and executes any tool calls.
+            </summary>
+            <param name="state">The current state.</param>
+            <returns>Updates to the state.</returns>
+        </member>
+        <member name="T:NetGraph.State.IGraphState">
+            <summary>
+            Base interface for all state schemas.
+            </summary>
+        </member>
+        <member name="M:NetGraph.State.IGraphState.Merge(System.Object)">
+            <summary>
+            Merges an update into the current state.
+            </summary>
+            <param name="update">The update to merge.</param>
+        </member>
+        <member name="M:NetGraph.State.IGraphState.Clone">
+            <summary>
+            Creates a deep copy of the current state.
+            </summary>
+            <returns>A new instance with the same data.</returns>
+        </member>
+        <member name="T:NetGraph.State.GraphState`1">
+            <summary>
+            Base abstract class for all state schemas.
+            </summary>
+            <typeparam name="T">The concrete state type.</typeparam>
+        </member>
+        <member name="M:NetGraph.State.GraphState`1.Merge(System.Object)">
+            <summary>
+            Merges an update into the current state.
+            </summary>
+            <param name="update">The update to merge.</param>
+        </member>
+        <member name="M:NetGraph.State.GraphState`1.MergeTyped(`0)">
+            <summary>
+            Merges a typed update into the current state.
+            </summary>
+            <param name="update">The typed update to merge.</param>
+        </member>
+        <member name="M:NetGraph.State.GraphState`1.Clone">
+            <summary>
+            Creates a deep copy of the current state.
+            </summary>
+            <returns>A new instance with the same data.</returns>
+        </member>
+        <member name="T:NetGraph.State.MessagesState">
+            <summary>
+            A state schema that maintains a list of messages.
+            </summary>
+        </member>
+        <member name="P:NetGraph.State.MessagesState.Messages">
+            <summary>
+            Gets or sets the messages in the state.
+            </summary>
+        </member>
+        <member name="M:NetGraph.State.MessagesState.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetGraph.State.MessagesState"/> class.
+            </summary>
+        </member>
+        <member name="M:NetGraph.State.MessagesState.#ctor(System.Collections.Generic.IEnumerable{NetGraph.Messages.Message})">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetGraph.State.MessagesState"/> class with initial messages.
+            </summary>
+            <param name="messages">The initial messages.</param>
+        </member>
+        <member name="M:NetGraph.State.MessagesState.MergeTyped(NetGraph.State.MessagesState)">
+            <summary>
+            Merges a typed update into the current state.
+            </summary>
+            <param name="update">The typed update to merge.</param>
+        </member>
+        <member name="M:NetGraph.State.MessagesState.Clone">
+            <summary>
+            Creates a deep copy of the current state.
+            </summary>
+            <returns>A new instance with the same data.</returns>
+        </member>
+        <member name="T:NetGraph.Tools.ToolAttribute">
+            <summary>
+            Attribute for marking methods as tools.
+            </summary>
+        </member>
+        <member name="P:NetGraph.Tools.ToolAttribute.Name">
+            <summary>
+            Gets or sets the name of the tool.
+            </summary>
+        </member>
+        <member name="P:NetGraph.Tools.ToolAttribute.Description">
+            <summary>
+            Gets or sets the description of the tool.
+            </summary>
+        </member>
+        <member name="T:NetGraph.Tools.Tool">
+            <summary>
+            Represents a tool that can be used by an agent.
+            </summary>
+        </member>
+        <member name="P:NetGraph.Tools.Tool.Name">
+            <summary>
+            Gets the name of the tool.
+            </summary>
+        </member>
+        <member name="P:NetGraph.Tools.Tool.Description">
+            <summary>
+            Gets the description of the tool.
+            </summary>
+        </member>
+        <member name="P:NetGraph.Tools.Tool.Executor">
+            <summary>
+            Gets the delegate that executes the tool.
+            </summary>
+        </member>
+        <member name="P:NetGraph.Tools.Tool.Parameters">
+            <summary>
+            Gets the parameter information for the tool.
+            </summary>
+        </member>
+        <member name="M:NetGraph.Tools.Tool.#ctor(System.String,System.String,System.Delegate)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NetGraph.Tools.Tool"/> class.
+            </summary>
+            <param name="name">The name of the tool.</param>
+            <param name="description">The description of the tool.</param>
+            <param name="executor">The delegate that executes the tool.</param>
+        </member>
+        <member name="M:NetGraph.Tools.Tool.Execute(System.String)">
+            <summary>
+            Executes the tool with the given arguments.
+            </summary>
+            <param name="arguments">The arguments for the tool, as a JSON string.</param>
+            <returns>The result of the tool execution.</returns>
+        </member>
+        <member name="T:NetGraph.Tools.ToolFactory">
+            <summary>
+            Factory for creating tools from methods.
+            </summary>
+        </member>
+        <member name="M:NetGraph.Tools.ToolFactory.FromMethod(System.Reflection.MethodInfo,System.Object)">
+            <summary>
+            Creates a tool from a method.
+            </summary>
+            <param name="method">The method info.</param>
+            <param name="target">The target object (for instance methods).</param>
+            <returns>The created tool.</returns>
+        </member>
+    </members>
+</doc>

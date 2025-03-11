@@ -1,0 +1,15 @@
+C:\Users\Shawno0\source\repos\NetGraph\src\NetGraph\bin\Debug\net8.0\NetGraph.deps.json
+C:\Users\Shawno0\source\repos\NetGraph\src\NetGraph\bin\Debug\net8.0\NetGraph.dll
+C:\Users\Shawno0\source\repos\NetGraph\src\NetGraph\bin\Debug\net8.0\NetGraph.pdb
+C:\Users\Shawno0\source\repos\NetGraph\src\NetGraph\bin\Debug\net8.0\NetGraph.xml
+C:\Users\Shawno0\source\repos\NetGraph\src\NetGraph\obj\Debug\net8.0\NetGraph.csproj.AssemblyReference.cache
+C:\Users\Shawno0\source\repos\NetGraph\src\NetGraph\obj\Debug\net8.0\NetGraph.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Shawno0\source\repos\NetGraph\src\NetGraph\obj\Debug\net8.0\NetGraph.AssemblyInfoInputs.cache
+C:\Users\Shawno0\source\repos\NetGraph\src\NetGraph\obj\Debug\net8.0\NetGraph.AssemblyInfo.cs
+C:\Users\Shawno0\source\repos\NetGraph\src\NetGraph\obj\Debug\net8.0\NetGraph.csproj.CoreCompileInputs.cache
+C:\Users\Shawno0\source\repos\NetGraph\src\NetGraph\obj\Debug\net8.0\NetGraph.sourcelink.json
+C:\Users\Shawno0\source\repos\NetGraph\src\NetGraph\obj\Debug\net8.0\NetGraph.dll
+C:\Users\Shawno0\source\repos\NetGraph\src\NetGraph\obj\Debug\net8.0\refint\NetGraph.dll
+C:\Users\Shawno0\source\repos\NetGraph\src\NetGraph\obj\Debug\net8.0\NetGraph.xml
+C:\Users\Shawno0\source\repos\NetGraph\src\NetGraph\obj\Debug\net8.0\NetGraph.pdb
+C:\Users\Shawno0\source\repos\NetGraph\src\NetGraph\obj\Debug\net8.0\ref\NetGraph.dll

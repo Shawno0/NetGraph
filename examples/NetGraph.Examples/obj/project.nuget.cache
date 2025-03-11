@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "LuNxMpTBm+akf341VvCvmgxh9I0SjQ0thYH45mr+HcL9DSON5ZxfyDLhFzaFy8B4ZnSX7fOtijW9H7aFTalAQw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Shawno0\\source\\repos\\NetGraph\\examples\\NetGraph.Examples\\NetGraph.Examples.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Shawno0\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.0\\microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",
+    "C:\\Users\\Shawno0\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\Shawno0\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\Shawno0\\.nuget\\packages\\system.reactive\\6.0.0\\system.reactive.6.0.0.nupkg.sha512",
+    "C:\\Users\\Shawno0\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512",
+    "C:\\Users\\Shawno0\\.nuget\\packages\\system.text.json\\8.0.0\\system.text.json.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
